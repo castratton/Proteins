@@ -146,21 +146,38 @@ interFile = open("interProbs.csv", "w")
 for i = 1:length(aaSeq)
 				distance = 0
 				for q = i:length(aaSeq)
-								pairSeq = symbol(string(aaSeq[i], aaSeq[q]))
-								println("Amino acid pair ==> $pairSeq")
-								pairProbs = interProbs[pairSeq]
-								println("Starting interaction likelihood ==> $pairProbs")
-								distance = Float64(sizeTab[symbol(aaSeq[q])]) + Float64(distTab[pairSeq](q))
-								interaction = Float64(interProbs[pairSeq])/distance
-								println("Likelihood of interaction ==> $interaction")
-								#writedlm(interaction)
-				    df = "$pairSeq,$interaction"
-				    print(df)
-								write(interFile, df,"\n")
-								finalInter[pairSeq] = interaction
+								if q-i > 1
+												println(q)
+								    println(i)
+								    pairSeq = symbol(string(aaSeq[i], aaSeq[q]))
+								    #println("Amino acid pair ==> $pairSeq")
+								    pairProbs = interProbs[pairSeq]
+								    #println("Starting interaction likelihood ==> $pairProbs")
+								    distance = Float64(sizeTab[symbol(aaSeq[q])]) + Float64(distTab[pairSeq](q))
+								    interaction = Float64(interProbs[pairSeq])/distance
+								    interaction2 = Float64(interaction)
+								    #println("Likelihood of interaction ==> $interaction")
+								    #writedlm(interaction)
+				        df = "$pairSeq,$interaction"
+				        print(df)
+								    write(interFile, df,"\n")
+								    finalInter[pairSeq] = interaction
+								    #tmpInter = findmax(interaction2)
+								    #println(tmpInter)
+								else
+								    pairSeq = symbol(string(aaSeq[i], aaSeq[q]))
+												interaction = Float64(0)
+												df = "$pairSeq,$interaction"
+												write(interFile, df,"\n")
+												finalInter[pairSeq] = interaction
+								end
 				end
+				#findmax(interaction)
+				#interMax = maximum(tmpInter)
+				#println("Maximum = $interMax")
 end
 close(interFile)
+#println(allInter)
 for j = finalInter
 				println(j)
 end
