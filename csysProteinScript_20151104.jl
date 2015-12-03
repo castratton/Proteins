@@ -159,7 +159,7 @@ for i = 1:length(aaSeq)
 								    #println("Likelihood of interaction ==> $interaction")
 								    #writedlm(interaction)
 				        df = "$pairSeq,$interaction"
-				        print(df)
+				        println(df)
 								    write(interFile, df,"\n")
 								    finalInter[pairSeq] = interaction
 								    #tmpInter = findmax(interaction2)
@@ -181,3 +181,28 @@ close(interFile)
 for j = finalInter
 				println(j)
 end
+
+maxInter2 = maximum(values(finalInter))
+maxInter = Float64(maxInter2)
+println(maxInter)
+maxKey = collect(keys(finalInter))[indmax(collect(values(finalInter)))]
+#maxKey = collect(keys(finalInter[maxInter]))
+#maxKey = get{Symbol}(keys(finalInter), maxInter,)
+maxKey = string(maxKey)
+println(maxKey[1])
+firstAA = maxKey[1] 
+secondAA = maxKey[2]
+reg_string_tmp = "$firstAA.*$secondAA"
+reg_string = Regex(reg_string_tmp)
+aaSeq2 = replace(aaSeq, reg_string, "")
+println(aaSeq2)
+#=
+for i = 1:length(aaSeq)
+				for q = i:length(aaSeq)
+								println(aaSeq)
+								pairSeq = symbol(string(aaSeq[i], aaSeq[q]))
+								println(pairSeq)
+
+				end
+end
+=#
