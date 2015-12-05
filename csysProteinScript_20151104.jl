@@ -145,8 +145,6 @@ for i = 1:length(aaSeq)
 				distance = 0
 				for q = i:length(aaSeq)
 								if q-i > 1
-												println(q)
-								    println(i)
 								    pairSeq = symbol(string(aaSeq[i], aaSeq[q]))
 								    pairProbs = interProbs[pairSeq]
 								    distance = Float64(sizeTab[symbol(aaSeq[q])]) + Float64(distTab[pairSeq](abs(q-i)))
@@ -166,22 +164,18 @@ for i = 1:length(aaSeq)
 				end
 end
 close(interFile)
-for j = finalInter
-				println(j)
-end
 #Getting the maximum, and using it to make the first fold
 maxInter2 = maximum(values(finalInter))
 maxInter = Float64(maxInter2)
 println(maxInter)
 maxKey = collect(keys(finalInter))[indmax(collect(values(finalInter)))]
 maxKey = string(maxKey)
-println(Char(maxKey[1]))
-println(maxKey[2])
 firstAA = Char(maxKey[1])
 secondAA = Char(maxKey[2])
 reg_string_tmp = "$firstAA[A-Z]{1,5}$secondAA"
 reg_string = Regex(reg_string_tmp)
 search_str = search(aaSeq, reg_string)
+println("$firstAA - $secondAA")
 println(search_str)
 
 distTab2 = Dict{Symbol,Function}()
@@ -190,8 +184,6 @@ for n in keys(interProbs)
 				distTab2[symbol(n)] = pepBond
 end
 aaSeq2 = replace(aaSeq, reg_string, "")
-println(aaSeq)
-println(aaSeq2)
 aaSeq2 = string(aaSeq2)
 #Second iteration using the folded sequence
 finalInter2 = Dict{Symbol, Float64}()
@@ -200,8 +192,6 @@ for i = 1:length(aaSeq2)
 				distance = 0
 				for q = i:length(aaSeq2)
 								if q-i > 1
-												println(q)
-								    println(i)
 								    pairSeq = symbol(string(aaSeq2[i], aaSeq2[q]))
 								    pairProbs = interProbs[pairSeq]
 								    distance2 = Float64(sizeTab[symbol(aaSeq2[q])]) + Float64(distTab2[pairSeq](abs(q-i)))
@@ -220,9 +210,6 @@ for i = 1:length(aaSeq2)
 				end
 end
 close(interFile2)
-for j = finalInter2
-				println(j)
-end
 
 #Making the second fold
 maxInter3 = maximum(values(finalInter2))
@@ -230,19 +217,15 @@ maxInter4 = Float64(maxInter3)
 println(maxInter4)
 maxKey4 = collect(keys(finalInter2))[indmax(collect(values(finalInter2)))]
 maxKey4 = string(maxKey4)
-println(Char(maxKey4[1]))
-println(maxKey4[2])
 firstAA2 = Char(maxKey4[1])
 secondAA2 = Char(maxKey4[2])
 reg_string_tmp2 = "$firstAA2[A-Z]{1,5}$secondAA2"
 reg_string2 = Regex(reg_string_tmp2)
 search_str2 = search(aaSeq2, reg_string2)
+println("$firstAA2 - $secondAA2")
 println(search_str2)
 
 aaSeq3 = replace(aaSeq2, reg_string2, "")
-println(aaSeq)
-println(aaSeq2)
-println(aaSeq3)
 
 #Third iteration
 distTab3 = Dict{Symbol,Function}()
@@ -259,8 +242,6 @@ for i = 1:length(aaSeq3)
 				distance = 0
 				for q = i:length(aaSeq3)
 								if q-i > 1
-												println(q)
-								    println(i)
 								    pairSeq = symbol(string(aaSeq3[i], aaSeq3[q]))
 								    pairProbs = interProbs[pairSeq]
 								    distance3 = Float64(sizeTab[symbol(aaSeq3[q])]) + Float64(distTab3[pairSeq](abs(q-i)))
@@ -289,20 +270,15 @@ maxInter6 = Float64(maxInter5)
 println(maxInter6)
 maxKey5 = collect(keys(finalInter3))[indmax(collect(values(finalInter3)))]
 maxKey5 = string(maxKey5)
-println(Char(maxKey5[1]))
-println(maxKey5[2])
 firstAA3 = Char(maxKey5[1])
 secondAA3 = Char(maxKey5[2])
 reg_string_tmp3 = "$firstAA3[A-Z]{1,5}$secondAA3"
 reg_string3 = Regex(reg_string_tmp3)
 search_str3 = search(aaSeq3, reg_string3)
+println("$firstAA3 - $secondAA3")
 println(search_str3)
 
 aaSeq4 = replace(aaSeq3, reg_string3, "")
-println(aaSeq)
-println(aaSeq2)
-println(aaSeq3)
-println(aaSeq4)
 
 #Third iteration
 distTab4 = Dict{Symbol,Function}()
@@ -319,8 +295,6 @@ for i = 1:length(aaSeq4)
 				distance = 0
 				for q = i:length(aaSeq4)
 								if q-i > 1
-												println(q)
-								    println(i)
 								    pairSeq = symbol(string(aaSeq4[i], aaSeq4[q]))
 								    pairProbs = interProbs[pairSeq]
 								    distance4 = Float64(sizeTab[symbol(aaSeq4[q])]) + Float64(distTab4[pairSeq](abs(q-i)))
@@ -349,18 +323,176 @@ maxInter8 = Float64(maxInter7)
 println(maxInter8)
 maxKey6 = collect(keys(finalInter4))[indmax(collect(values(finalInter4)))]
 maxKey6 = string(maxKey6)
-println(Char(maxKey6[1]))
-println(maxKey6[2])
 firstAA4 = Char(maxKey6[1])
 secondAA4 = Char(maxKey6[2])
 reg_string_tmp4 = "$firstAA4[A-Z]{1,5}$secondAA4"
 reg_string4 = Regex(reg_string_tmp4)
 search_str4 = search(aaSeq4, reg_string4)
+println("$firstAA4 - $secondAA4")
 println(search_str4)
 
 aaSeq5 = replace(aaSeq4, reg_string4, "")
+
+distTab5 = Dict{Symbol,Function}()
+
+ for n in keys(interProbs)
+     distTab5[symbol(n)] = pepBond
+ end
+ #println(aaSeq)
+ #println(aaSeq2)
+ aaSeq5 = string(aaSeq5)
+ finalInter5 = Dict{Symbol, Float64}()
+ interFile5 = open("interProbs5.csv", "w")
+ for i = 1:length(aaSeq5)
+     distance = 0
+     for q = i:length(aaSeq5)
+         if q-i > 1
+             pairSeq = symbol(string(aaSeq5[i], aaSeq5[q]))
+             pairProbs = interProbs[pairSeq]
+             distance5 = Float64(sizeTab[symbol(aaSeq5[q])]) + Float64(distTab5[pairSeq](abs(q-i)))
+             interaction5 = Float64(interProbs[pairSeq])/distance5
+             df5 = "$pairSeq,$interaction5"
+             println(df5)
+             write(interFile5, df5,"\n")
+             finalInter5[pairSeq] = interaction5
+         else
+             pairSeq = symbol(string(aaSeq5[i], aaSeq5[q]))
+             interaction5 = Float64(0)
+             df5 = "$pairSeq,$interaction5"
+             write(interFile5, df5,"\n")
+             finalInter5[pairSeq] = interaction5
+         end
+     end
+ end
+ close(interFile5)
+ for j = finalInter5
+     println(j)
+ end
+
+ #Making the second fold
+ maxInter9 = maximum(values(finalInter5))
+ maxInter10 = Float64(maxInter9)
+ println(maxInter10)
+ maxKey7 = collect(keys(finalInter5))[indmax(collect(values(finalInter5)))]
+ maxKey7 = string(maxKey7)
+ firstAA5 = Char(maxKey7[1])
+ secondAA5 = Char(maxKey7[2])
+ reg_string_tmp5 = "$firstAA5[A-Z]{1,5}$secondAA5"
+ reg_string5 = Regex(reg_string_tmp5)
+ search_str5 = search(aaSeq5, reg_string5)
+ println("$firstAA5 - $secondAA5")
+ println(search_str5)
+
+ aaSeq6 = replace(aaSeq5, reg_string5, "")
+
+distTab6 = Dict{Symbol,Function}()
+
+ for n in keys(interProbs)
+     distTab6[symbol(n)] = pepBond
+ end
+ #println(aaSeq)
+ #println(aaSeq2)
+ aaSeq6 = string(aaSeq6)
+ finalInter6 = Dict{Symbol, Float64}()
+ interFile6 = open("interProbs6.csv", "w")
+ for i = 1:length(aaSeq6)
+     distance = 0
+     for q = i:length(aaSeq6)
+         if q-i > 1
+             pairSeq = symbol(string(aaSeq6[i], aaSeq6[q]))
+             pairProbs = interProbs[pairSeq]
+             distance6 = Float64(sizeTab[symbol(aaSeq6[q])]) + Float64(distTab6[pairSeq](abs(q-i)))
+             interaction6 = Float64(interProbs[pairSeq])/distance6
+             df6 = "$pairSeq,$interaction6"
+             println(df6)
+             write(interFile6, df6,"\n")
+             finalInter6[pairSeq] = interaction6
+         else
+             pairSeq = symbol(string(aaSeq6[i], aaSeq6[q]))
+             interaction6 = Float64(0)
+             df6 = "$pairSeq,$interaction6"
+             write(interFile6, df6,"\n")
+             finalInter6[pairSeq] = interaction6
+         end
+     end
+ end
+ close(interFile6)
+ for j = finalInter6
+     println(j)
+ end
+
+ #Making the second fold
+ maxInter11 = maximum(values(finalInter6))
+ maxInter12 = Float64(maxInter11)
+ println(maxInter12)
+ maxKey8 = collect(keys(finalInter6))[indmax(collect(values(finalInter6)))]
+ maxKey8 = string(maxKey8)
+ firstAA6 = Char(maxKey8[1])
+ secondAA6 = Char(maxKey8[2])
+ reg_string_tmp6 = "$firstAA6[A-Z]{1,5}$secondAA6"
+ reg_string6 = Regex(reg_string_tmp6)
+ search_str6 = search(aaSeq6, reg_string6)
+ println("$firstAA6 - $secondAA6")
+ println(search_str6)
+
+aaSeq7 = replace(aaSeq6, reg_string6, "")
+
+distTab7 = Dict{Symbol,Function}()
+
+for n in keys(interProbs)
+    distTab7[symbol(n)] = pepBond
+end
+#println(aaSeq)
+#println(aaSeq2)
+aaSeq7 = string(aaSeq7)
+finalInter7 = Dict{Symbol, Float64}()
+interFile7 = open("interProbs7.csv", "w")
+for i = 1:length(aaSeq7)
+    distance = 0
+    for q = i:length(aaSeq7)
+        if q-i > 1
+            pairSeq = symbol(string(aaSeq7[i], aaSeq7[q]))
+            pairProbs = interProbs[pairSeq]
+            distance7 = Float64(sizeTab[symbol(aaSeq7[q])]) + Float64(distTab7[pairSeq](abs(q-i)))
+            interaction7 = Float64(interProbs[pairSeq])/distance7
+            df7 = "$pairSeq,$interaction7"
+            println(df7)
+            write(interFile7, df7,"\n")
+            finalInter7[pairSeq] = interaction7
+        else
+            pairSeq = symbol(string(aaSeq7[i], aaSeq7[q]))
+            interaction7 = Float64(0)
+            df7 = "$pairSeq,$interaction7"
+            write(interFile7, df7,"\n")
+            finalInter7[pairSeq] = interaction7
+        end
+    end
+end
+close(interFile7)
+for j = finalInter7
+    println(j)
+end
+
+#Making the second fold
+maxInter13 = maximum(values(finalInter7))
+maxInter14 = Float64(maxInter13)
+println(maxInter14)
+maxKey9 = collect(keys(finalInter7))[indmax(collect(values(finalInter7)))]
+maxKey9 = string(maxKey9)
+firstAA7 = Char(maxKey9[1])
+secondAA7 = Char(maxKey9[2])
+reg_string_tmp7 = "$firstAA7[A-Z]{1,5}$secondAA7"
+reg_string7 = Regex(reg_string_tmp7)
+search_str7 = search(aaSeq7, reg_string7)
+println("$firstAA7 - $secondAA7")
+println(search_str7)
+
+aaSeq8 = replace(aaSeq7, reg_string7, "")
 println(aaSeq)
 println(aaSeq2)
 println(aaSeq3)
 println(aaSeq4)
 println(aaSeq5)
+println(aaSeq6)
+println(aaSeq7)
+println(aaSeq8)
